@@ -2,15 +2,28 @@
 
 [Metabase](http://www.metabase.com/) is the easy, open source way for everyone in your company to ask questions and learn from data.
 
-# Running Metabase on Heroku
+# How to update Metabase
 
-[Heroku](https://www.heroku.com/home) is a great place to evaluate Metabase and take it for a quick spin with just a click of a button and a couple minutes of waiting time. If you decide to keep your Metabase running long term we recommend some upgrades as noted in the documentation linked to below to avoid limitations of the Heroku free tier.
+Update the version in this file: https://github.com/CrowdJusticeDev/metabase-buildpack/blob/master/bin/version
 
-*tl;dr Click this button to deploy Metabase to Heroku for free.*
+Clone the metabase-deploy repo to your local machine:
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+```bash
+git clone https://github.com/CrowdJusticeDev/metabase-deploy
+cd metabase-deploy
+```
 
-For more details, check out the [Heroku-specific deploy documentation](http://www.metabase.com/docs/latest/operations-guide/running-metabase-on-heroku.html) for help with:
-* Upgrading beyond Heroku's free plan
-* Deploying Metabase version updates to Heroku
-* Troubleshooting
+Add a git remote for our Metabase instance (replace <metabase-app-name> with the name of the Heroku app):
+
+```bash
+git remote add heroku https://git.heroku.com/<metabase-app-name>.git
+```
+
+Add an empty commit to the repo to force a re-deploy:
+
+```bash
+git commit --allow-empty -m "empty commit"
+git push heroku master
+```
+
+Wait for the deploy to finish
